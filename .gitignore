@@ -1,0 +1,49 @@
+# STM32CubeIDE build files
+/Debug/
+/Release/
+
+# STM32CubeMX generated backup
+*.ioc.backup
+
+# STM32CubeIDE metadata and config
+/.settings/
+/.metadata/
+.cproject
+.project
+.loadpath
+
+# Backup files
+*~
+*.swp
+*.swo
+*.bak
+
+# IDE logs and temp
+*.log
+*.tmp
+
+# Object files
+*.o
+*.d
+*.lst
+*.map
+*.elf
+*.bin
+*.hex
+
+# Flash and memory files
+*.ld
+
+# CMSIS pack indexes (if any)
+/.packs/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+desktop.ini
+
+# VS Code (if you use it)
+/.vscode/
