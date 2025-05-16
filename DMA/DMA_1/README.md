@@ -35,7 +35,7 @@ Sending large data in **blocking mode** forces the CPU to wait until transmissio
 
 ---
 
-## 💡 Code Snippet
+## Code Snippet
 
 ```c
 HAL_UART_Transmit(&huart2, TxData, 10240, HAL_MAX_DELAY);
