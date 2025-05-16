@@ -2,7 +2,7 @@
 
 This project demonstrates **UART transmission** of a large data buffer (10KB) using **blocking mode** on an STM32 microcontroller. DMA is initialized, but **not actively used in transmission**, showing the inefficiencies of blocking communication.
 
-## 🧠 Key Concepts
+## Key Concepts
 
 - **UART2** is used to transmit 10KB of data.
 - **DMA** is initialized but not used for actual transmission.
@@ -11,13 +11,13 @@ This project demonstrates **UART transmission** of a large data buffer (10KB) us
 
 ---
 
-## 🔍 Why This Matters
+## Why This Matters
 
 Sending large data in **blocking mode** forces the CPU to wait until transmission finishes, delaying other operations like blinking LEDs or handling inputs. This highlights the importance of **DMA or interrupt-based communication** in real-time systems.
 
 ---
 
-## 📋 Behavior
+## Behavior
 
 - A 10KB buffer (`TxData`) is filled with sequential values.
 - In each loop:
@@ -27,7 +27,7 @@ Sending large data in **blocking mode** forces the CPU to wait until transmissio
 
 ---
 
-## 🔧 Hardware Requirements
+## Hardware Requirements
 
 - STM32L0 series MCU (e.g., Nucleo-L073RZ).
 - USART2 connected via USB or serial adapter.
