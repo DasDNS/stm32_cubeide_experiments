@@ -58,3 +58,20 @@ USART2 is initialized with the following settings:
 
 ```c
 HAL_UART_Receive_IT(&huart2, rx_data, 6);
+The received 6 bytes are immediately echoed back via UART.
+
+📁 Key Files
+main.c: Main program with UART logic
+
+stm32l4xx_hal_msp.c: HAL low-level hardware init (auto-generated)
+
+stm32l4xx_it.c: Interrupt handlers (if used)
+
+usart.c: UART peripheral initialization (auto-generated)
+
+🧠 Notes
+The project uses interrupt-based UART reception rather than polling or DMA.
+
+You can expand the code to parse received commands or communicate with other devices.
+
+For higher efficiency and continuous reception, consider implementing a circular buffer with DMA.
