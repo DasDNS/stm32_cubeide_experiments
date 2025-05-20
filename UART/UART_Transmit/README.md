@@ -1,76 +1,60 @@
-STM32 UART Communication Example
-This project demonstrates UART (Universal Asynchronous Receiver/Transmitter) communication using STM32 HAL libraries. It is designed for STM32 boards with USART2 configured and uses interrupt-based reception.
+# STM32 UART Communication Example
 
-📦 Features
-Initializes USART2 with the following settings:
+This project demonstrates basic **UART (USART2)** communication using an STM32 microcontroller and the HAL library.
 
-Baud Rate: 115200
+## 📦 Overview
 
-Data Bits: 8
+The firmware initializes USART2 and sets up **interrupt-based UART receive (RX)**. When 6 bytes of data are received, the same data is echoed back to the sender via UART transmit (TX). This example is built using STM32CubeMX and STM32CubeIDE.
 
-Stop Bits: 1
+## 🔧 Hardware Requirements
 
-Parity: None
+- STM32 microcontroller (e.g., STM32L4 series)
+- USB to UART interface (e.g., ST-Link V2 or USB-TTL module)
+- Terminal program (e.g., PuTTY, Tera Term, minicom)
+- Micro USB cable
 
-Mode: TX/RX
+## 🚀 Getting Started
 
-Receives 6 bytes via UART using interrupt (HAL_UART_Receive_IT)
+### 1. Wiring
 
-Echoes back received bytes via UART (HAL_UART_Transmit)
+Connect your STM32 board's USART2 TX/RX pins to your USB-UART converter or ST-Link as follows:
 
-Includes a transmit buffer ("Welcome!\n\r") for optional periodic messaging (currently commented out)
+| STM32 Pin | Function | USB-UART |
+|-----------|----------|----------|
+| PA2       | TX       | RX       |
+| PA3       | RX       | TX       |
+| GND       | GND      | GND      |
 
-🧰 Hardware Requirements
-STM32 development board (e.g., Nucleo-L476RG or similar)
+> Note: Pin mapping may vary depending on your STM32 board.
 
-USB-to-UART converter or onboard ST-LINK Virtual COM port
+### 2. Flash the Code
 
-Serial terminal (e.g., PuTTY, Tera Term, minicom)
+Build and flash the firmware using STM32CubeIDE or another supported environment.
 
-📋 UART Pin Configuration (USART2)
-Signal	STM32 Pin	Function
-TX	PA2	USART2_TX
-RX	PA3	USART2_RX
+### 3. Serial Terminal Settings
 
-🚀 How It Works
-On startup, USART2 is initialized with the configuration described above.
+Open a terminal program and configure it with the following settings:
 
-The MCU enters an infinite loop, staying ready to receive UART data.
+- **Baud rate:** 115200
+- **Data bits:** 8
+- **Stop bits:** 1
+- **Parity:** None
+- **Flow Control:** None
 
-Upon receiving 6 bytes (configured buffer size), the HAL_UART_RxCpltCallback() is triggered.
+## 📡 UART Functionality
 
-The received 6-byte message is transmitted back to the sender (loopback/echo).
+### Initialization
 
-🧪 Testing the UART
-Flash the firmware to your STM32 board using STM32CubeIDE or STM32CubeProgrammer.
+USART2 is initialized with the following settings:
 
-Open a serial terminal on your PC and connect to the board's UART port.
+- Baud Rate: `115200`
+- Word Length: `8 bits`
+- Stop Bits: `1`
+- Parity: `None`
+- Mode: `TX and RX`
+- Hardware Flow Control: `None`
 
-Configure the terminal:
+### RX Interrupt
 
-Baud Rate: 115200
-
-Data Bits: 8
-
-Stop Bits: 1
-
-No Parity
-
-No Flow Control
-
-Send a 6-character message.
-
-You will see the same 6 characters echoed back.
-
-📁 Key Code Highlights
-
-HAL_UART_Receive_IT(&huart2, rx_data, 6);  // Start receiving 6 bytes in interrupt mode
-...
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-    HAL_UART_Transmit(&huart2, rx_data, 6, 10);  // Echo received data
-}
-🛠 Notes
-Modify rx_data size in HAL_UART_Receive_IT if you expect different data lengths.
-
-If continuous reception is needed, re-enable HAL_UART_Receive_IT() in the callback after transmission.
+```c
+HAL_UART_Receive_IT(&huart2, rx_data, 6);
